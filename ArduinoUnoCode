@@ -1,0 +1,22 @@
+const int soilMoisturePin = A0;  // Analog pin for soil moisture sensor
+const int pumpPin = 7;          // Digital pin for water pump
+
+int soilMoistureThreshold = 500; // Adjust this threshold based on your soil and plant needs
+
+void setup() {
+  pinMode(soilMoisturePin, INPUT);
+  pinMode(pumpPin, OUTPUT);
+}
+
+void loop() {
+  int soilMoisture = analogRead(soilMoisturePin);
+
+  if (soilMoisture < soilMoistureThreshold) {
+    // Soil is too dry, turn on the water pump
+    digitalWrite(pumpPin, HIGH);
+    delay(5000);  // Run the pump for 5 seconds (adjust as needed)
+    digitalWrite(pumpPin, LOW);  // Turn off the pump
+  }
+
+  delay(600000);  // Wait for 10 minutes before checking again (adjust as needed)
+}
